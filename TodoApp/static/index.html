@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TodoApp — FastAPI</title>
+  <meta name="description" content="A beautiful, fast Todo app powered by FastAPI and vanilla JavaScript." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- Background blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-icon">✅</div>
+      <h1 class="header-title">My Todos</h1>
+      <p class="header-sub">Powered by <span class="highlight">FastAPI</span></p>
+    </header>
+
+    <!-- Add Todo Card -->
+    <div class="card add-card">
+      <h2 class="card-title">Add New Task</h2>
+      <form id="addForm" autocomplete="off">
+        <div class="form-group">
+          <input
+            type="text"
+            id="titleInput"
+            class="form-input"
+            placeholder="What needs to be done?"
+            maxlength="200"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <textarea
+            id="descInput"
+            class="form-textarea"
+            placeholder="Add a description (optional)..."
+            maxlength="500"
+            rows="2"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="addBtn">
+          <span class="btn-icon">+</span> Add Task
+        </button>
+      </form>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="statsBar">
+      <span id="totalCount" class="stat">0 total</span>
+      <span id="activeCount" class="stat stat-active">0 active</span>
+      <span id="doneCount" class="stat stat-done">0 done</span>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="tab active" data-filter="all">All</button>
+      <button class="tab" data-filter="active">Active</button>
+      <button class="tab" data-filter="completed">Completed</button>
+    </div>
+
+    <!-- Todo List -->
+    <div id="todoList" class="todo-list">
+      <!-- Items injected here -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="empty-state hidden">
+      <div class="empty-icon">🎯</div>
+      <p class="empty-text">No tasks here yet!</p>
+      <p class="empty-sub">Add your first task above to get started.</p>
+    </div>
+
+    <!-- Loading-->
+    <div id="loadingState" class="loading-state">
+      <div class="spinner"></div>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal-overlay hidden">
+    <div class="modal">
+      <h2 class="modal-title">Edit Task</h2>
+      <form id="editForm" autocomplete="off">
+        <input type="hidden" id="editId" />
+        <div class="form-group">
+          <label class="form-label">Title</label>
+          <input type="text" id="editTitle" class="form-input" maxlength="200" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="editDesc" class="form-textarea" maxlength="500" rows="3"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="cancelEdit">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
